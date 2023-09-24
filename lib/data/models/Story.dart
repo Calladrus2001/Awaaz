@@ -1,4 +1,4 @@
-import 'choice.dart';
+import '../models/choice.dart';
 
 class Story {
   String storyTitle;
@@ -8,13 +8,9 @@ class Story {
   String characterImage;
   int nextStory;
   bool isMainCharacter;
-  bool isFadeOut;
-  bool isFadeIn;
   bool isEndOfEpisode;
   String bonusText;
-  String achievementText;
-  bool loadAd;
-  bool showAd;
+
   Story({
     required this.storyTitle,
     required this.background,
@@ -23,13 +19,8 @@ class Story {
     required this.characterImage,
     required this.nextStory,
     this.isMainCharacter = true,
-    this.isFadeOut = false,
-    this.isFadeIn = false,
     this.isEndOfEpisode = false,
     this.bonusText = "",
-    this.achievementText = "",
-    this.loadAd = false,
-    this.showAd = false,
   });
 
   @override
@@ -41,9 +32,7 @@ class Story {
         "characterImage: $characterImage\n"
         "nextStory: $nextStory\n"
         "isMainCharacter: $isMainCharacter\n"
-        "isFadeOut: $isFadeOut\n"
-        "isFadeIn: $isFadeIn\n"
         "isEndOfEpisode: $isEndOfEpisode\n"
         "storyTitle: $storyTitle\n";
-  }
+    }
 }

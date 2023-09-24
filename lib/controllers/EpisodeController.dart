@@ -1,9 +1,10 @@
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class EpisodeController extends GetxController {
   int episodes = 10;
-  RxInt currentEpsiode = 0.obs;
-  Rx<List<EpisodeState>> episodeStates = [].obs as Rx<List<EpisodeState>>;
+  RxInt _currentEpisode = 0.obs;
+  Rx<List<EpisodeState>> episodeStates = Rx<List<EpisodeState>>(<EpisodeState>[]);
 
   @override
   void onInit() async {
@@ -12,23 +13,42 @@ class EpisodeController extends GetxController {
   }
 
   Future<void> fetchStates() async {
-    //TODO: fetch current episode number
-    //TODO: declare all further episodes as locked.
+    _currentEpisode.value = GetStorage().read("currentEpisode") ?? await getEpisodeNumber();
+    GetStorage().write("currentEpisode", _currentEpisode.value);
+
+    for (int i = 0; i < episodes; i++) {
+      if (i == _currentEpisode.value) continue;
+      if (i < _currentEpisode.value) {
+        episodeStates.value.add(EpisodeState(isCompleted: true, isLocked: false));
+      }
+      else {
+        episodeStates.value.add(EpisodeState(isCompleted: false, isLocked: true));
+      }
+    }
+  }
+
+  Future<int> getEpisodeNumber() async {
+    //TODO: fetch episodeNumber from backend if it does not exist locally
+    return 0;
   }
 
   Future<void> markCurrentEpisodeComplete() async {
-    currentEpsiode.value += 1;
+    episodeStates.value[_currentEpisode.value] = EpisodeState(isCompleted: true, isLocked: false);
+    _currentEpisode.value += 1;
+    if (_currentEpisode < episodes) {
+      episodeStates.value[_currentEpisode.value] = EpisodeState(isCompleted: false, isLocked: false);
+    }
+    GetStorage().write("storyNumber", 0);
     //TODO: get instance of Network Service and update db
-    //TODO: mark next episode, if exists, unlocked
   }
 }
 
 class EpisodeState {
-  bool isCompleted = false;
-  bool isLocked = true;
+  bool isCompleted;
+  bool isLocked;
 
   EpisodeState({
-    this.isCompleted = false,
-    this.isLocked = true,
+    required this.isCompleted,
+    required this.isLocked
   });
 }
