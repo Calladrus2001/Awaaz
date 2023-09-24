@@ -27,7 +27,7 @@ class _AuthScreenState extends State<AuthScreen> {
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
             if (true) {
-              return const HomeScreen();
+              return HomeScreen();
             } else {
               return SingleChildScrollView(
                 child: Column(

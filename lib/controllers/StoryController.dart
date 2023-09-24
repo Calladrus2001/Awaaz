@@ -30,7 +30,7 @@ class StoryController extends GetxController {
   Future<void> getNextStory(Story story, Choice? choice) async {
     if (story.isEndOfEpisode) {
       episodeController.markCurrentEpisodeComplete();
-      Get.offAll(const HomeScreen());
+      Get.offAll(HomeScreen());
     }
     else {
       if (choice != null) {

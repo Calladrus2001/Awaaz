@@ -47,3 +47,6 @@ app.*.map.json
 firebase_options.dart
 google-services.json
 GoogleService-Info.plist
+
+# Custom
+assets/images

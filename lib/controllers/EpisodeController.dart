@@ -8,16 +8,18 @@ class EpisodeController extends GetxController {
 
   @override
   void onInit() async {
-    await fetchStates();
+    await _fetchStates();
     super.onInit();
   }
 
-  Future<void> fetchStates() async {
+  Future<void> _fetchStates() async {
     _currentEpisode.value = GetStorage().read("currentEpisode") ?? await getEpisodeNumber();
     GetStorage().write("currentEpisode", _currentEpisode.value);
 
     for (int i = 0; i < episodes; i++) {
-      if (i == _currentEpisode.value) continue;
+      if (i == _currentEpisode.value) {
+        episodeStates.value.add(EpisodeState(isCompleted: false, isLocked: false));
+      }
       if (i < _currentEpisode.value) {
         episodeStates.value.add(EpisodeState(isCompleted: true, isLocked: false));
       }
