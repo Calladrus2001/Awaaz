@@ -42,6 +42,7 @@ class EpisodeController extends GetxController {
     }
     GetStorage().write("storyNumber", 0);
     //TODO: get instance of Network Service and update db
+    update();
   }
 }
 

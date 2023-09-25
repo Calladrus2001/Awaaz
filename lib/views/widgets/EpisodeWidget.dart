@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sih_projectx/views/screens/LoadingScreen.dart';
 
 Widget episodeWidget(int idx, String name, bool isComplete, bool isLocked) {
   return GestureDetector(
@@ -17,9 +18,6 @@ Widget episodeWidget(int idx, String name, bool isComplete, bool isLocked) {
         children: [
           Container(
             height: 380, // Adjust as needed
-            decoration: BoxDecoration(
-
-            ),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
@@ -67,7 +65,7 @@ Widget episodeWidget(int idx, String name, bool isComplete, bool isLocked) {
       } else if (isLocked) {
         Get.snackbar("ProjectX", "This episode is locked, complete the previous episodes first.", colorText: Colors.white);
       } else {
-        //TODO: go to game screen
+        Get.to(()=> LoadingScreen());
       }
     },
   );
