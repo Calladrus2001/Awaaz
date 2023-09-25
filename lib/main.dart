@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:sih_projectx/controllers/EpisodeController.dart';
-import 'package:sih_projectx/controllers/StoryController.dart';
 import 'package:sih_projectx/views/screens/AuthScreen.dart';
 
 import 'firebase_options.dart';
@@ -13,9 +12,7 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await GetStorage.init();
 
-  //! do not change the order of these controllers as they are not independent
   EpisodeController episodeController = Get.put(EpisodeController());
-  StoryController storyController = Get.put(StoryController());
   runApp(const MyApp());
 }
 
